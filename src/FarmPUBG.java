@@ -22,7 +22,7 @@ public class FarmPUBG {
     static boolean canStart = true;
     static Thread t = null;
 
-    public static void playBtnCheck(Robot robot, BufferedImage bufImg) {
+    public static boolean playBtnCheck(Robot robot, BufferedImage bufImg,boolean runGame) {
         int x, y, red, green, blue, clr;
         x = 200;
         y = 715;
@@ -39,12 +39,14 @@ public class FarmPUBG {
                     robot.delay(1000);// double click imitation
                     robot.mousePress(InputEvent.BUTTON1_MASK);
                     robot.mouseRelease(InputEvent.BUTTON1_MASK);
+                    runGame = false;
                 }
             }
         }
+        return runGame;
     }
 
-    public static void exitBtnCheck(Robot robot, BufferedImage bufImg) {
+    public static boolean exitBtnCheck(Robot robot, BufferedImage bufImg,boolean runGame) {
         int x, y, red, green, blue, clr;
         x = 1297;
         y = 680;
@@ -68,9 +70,11 @@ public class FarmPUBG {
                     robot.delay(1000);// double click imitation
                     robot.mousePress(InputEvent.BUTTON1_MASK);
                     robot.mouseRelease(InputEvent.BUTTON1_MASK);
+                    runGame = true;
                 }
             }
         }
+        return runGame;
     }
 
     public static void main(String[] args) throws AWTException, IOException, InterruptedException {

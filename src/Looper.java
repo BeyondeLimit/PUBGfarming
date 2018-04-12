@@ -19,9 +19,9 @@ public class Looper implements Runnable {
         robot = new Robot();
         keepRunning = new AtomicBoolean(true);
     }
-    Looper(Robot robot) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+//    Looper(Robot robot) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
 
     public void stop() {
         keepRunning.set(false);
@@ -30,20 +30,16 @@ public class Looper implements Runnable {
     public void run() {
         Rectangle area;
         BufferedImage bufImg;
-        boolean runGame = true, exitGame = false;
+        boolean runGame = true;
         while (keepRunning.get()) {
             //Pubg play button RGB = 255,199,0
             //Pubg exit button RGB = 255,255,255
             area = new Rectangle(Toolkit.getDefaultToolkit().getScreenSize());
             bufImg = robot.createScreenCapture(area);
             if (runGame) {
-                FarmPUBG.playBtnCheck(robot, bufImg);
-                exitGame = true;
-                runGame = false;
-            } else if (exitGame) {
-                FarmPUBG.exitBtnCheck(robot, bufImg);
-                runGame = true;
-                exitGame = false;
+                runGame = FarmPUBG.playBtnCheck(robot, bufImg,runGame);
+            } else if (!runGame) {
+                runGame = FarmPUBG.exitBtnCheck(robot, bufImg,runGame);
             }
         }
     }
